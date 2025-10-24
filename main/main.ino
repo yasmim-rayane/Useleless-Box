@@ -1,5 +1,14 @@
 #include <Servo.h>
 
+/*
+  Useless Box with Skeleton - Main Code
+  [ ] - Implement non-blocking skeleton animations for door control and improve action delays
+  [ ] - Add sound effects to skeleton animations
+  [ ] - Optimize servo movements for smoother operation - (for)
+  [ ] - Code refactoring and structuring for better readability and maintenance
+  [ ] - Final testing and debugging
+*/
+
 /* Constants */
 const int SERVO_LEFT_PIN = 7;
 const int SERVO_RIGHT_PIN = 10;
