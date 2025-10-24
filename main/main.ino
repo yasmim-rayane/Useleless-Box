@@ -7,7 +7,6 @@ void openLeftDoor();
 void openRightDoor();
 
 /* ===== Constants ===== */
-// Servos
 Servo leftDoor;
 Servo rightDoor;
 Servo skeletonBody;
