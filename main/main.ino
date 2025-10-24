@@ -1,37 +1,40 @@
 #include <Servo.h>
 
-/* Function's prototypes */
-void rgbFade(); // - COMPLETED
-void openAnyDoor();
-void openLeftDoor();
-void openRightDoor();
+/* Constants */
+const int SERVO_LEFT_PIN = 7;
+const int SERVO_RIGHT_PIN = 10;
+const int SERVO_SKELETON_BODY_PIN = 4;
+const int SERVO_SKELETON_HAND_PIN = 9;
 
-/* ===== Constants ===== */
+const int RGB_RED_PIN = 11;
+const int RGB_GREEN_PIN = 5;
+const int RGB_BLUE_PIN = 6;
+
+const int TOGGLE_SWITCH_PIN = 13;
+
+// Servo angles
+const int DOOR_OPEN_ANGLE = 45;
+const int DOOR_CLOSED_ANGLE = 0;
+
+/* Servos */
 Servo leftDoor;
 Servo rightDoor;
 Servo skeletonBody;
 Servo skeletonHand;
 
-const int leftDoorPin = 7;
-const int rightDoorPin = 10;
-const int skeletonBodyPin = 4;
-const int skeletonHandPin = 9;
-
-// PWM pins for the RGB strip
-const int redPin = 11;
-const int greenPin = 5;
-const int bluePin = 6;
-
-// Other pins
-const int toogleSwitchPin = 13;
+/* Function's prototypes */
+void triggerRandomDoor();
+void openLeftDoor(); // Rever essas funções para transformar em struct
+void openRightDoor(); // e essa
+void rgbFade();
 
 /* Initial config */
 void setup(){
   // Servo's attach
-  leftDoor.attach(leftDoorPin);
-  rightDoor.attach(rightDoorPin);
-  skeletonBody.attach(skeletonBodyPin);
-  skeletonHand.attach(skeletonHandPin);
+  leftDoor.attach(SERVO_LEFT_PIN);
+  rightDoor.attach(SERVO_RIGHT_PIN);
+  skeletonBody.attach(SERVO_SKELETON_BODY_PIN);
+  skeletonHand.attach(SERVO_SKELETON_HAND_PIN);
 
   // Servo's reset
   leftDoor.write(0);
@@ -40,37 +43,37 @@ void setup(){
   skeletonHand.write(0);
 
   // RGB strip
-  pinMode(redPin, OUTPUT);
-  pinMode(greenPin, OUTPUT);
-  pinMode(bluePin, OUTPUT);
+  pinMode(RGB_RED_PIN, OUTPUT);
+  pinMode(RGB_GREEN_PIN, OUTPUT);
+  pinMode(RGB_BLUE_PIN, OUTPUT);
 
   // Toogle switch
-  pinMode(toogleSwitchPin, INPUT);
+  pinMode(TOGGLE_SWITCH_PIN, INPUT);
 }
 
 /* Most important code below BE CAREFUL*/
 void loop(){
-  int isToogleSwitchSwitched = digitalRead(toogleSwitchPin);
-  isToogleSwitchSwitched ? randomDoor() : rgbFade();
+  int isToogleSwitchSwitched = digitalRead(TOGGLE_SWITCH_PIN);
+  isToogleSwitchSwitched ? triggerRandomDoor() : rgbFade();
 }
 
-void randomDoor(){
+void triggerRandomDoor(){
   int num = random(1, 3);
   num == 1 ? openLeftDoor() : openRightDoor();
 }
 
 void openLeftDoor(){
-  leftDoor.write(90);
+  leftDoor.write(DOOR_OPEN_ANGLE);
   delay(2000);
   // someAction();
-  leftDoor.write(0);
+  leftDoor.write(DOOR_CLOSED_ANGLE);
 }
 
 void openRightDoor(){
-  rightDoor.write(90);
+  rightDoor.write(DOOR_OPEN_ANGLE);
   delay(2000);
   // someAction();
-  rightDoor.write(0);
+  rightDoor.write(DOOR_CLOSED_ANGLE);
 }
 
 void rgbFade() {
@@ -124,8 +127,8 @@ void rgbFade() {
     }
 
     // Update PWM outputs
-    analogWrite(redPin, redValue);
-    analogWrite(greenPin, greenValue);
-    analogWrite(bluePin, blueValue);
+    analogWrite(RGB_RED_PIN, redValue);
+    analogWrite(RGB_GREEN_PIN, greenValue);
+    analogWrite(RGB_BLUE_PIN, blueValue);
   }
 }
