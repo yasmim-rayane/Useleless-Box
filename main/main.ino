@@ -64,16 +64,110 @@ void triggerRandomDoor(){
 
 void openLeftDoor(){
   leftDoor.write(DOOR_OPEN_ANGLE);
-  delay(2000);
-  // someAction();
+  delay(500);
+  wakeSkeleton();
+  delay(500);
   leftDoor.write(DOOR_CLOSED_ANGLE);
 }
 
 void openRightDoor(){
   rightDoor.write(DOOR_OPEN_ANGLE);
-  delay(2000);
-  // someAction();
+  delay(500);
+  handSkeleton();
+  delay(500);
   rightDoor.write(DOOR_CLOSED_ANGLE);
+}
+
+void handSkeleton(){ // Randomly select a hand animation for the skeleton to turn off the switch
+  switch (0) {// random(0, 10)
+  case 0:
+    // Simply move the skeleton hand to turn off the switch
+    skeletonHand.write(90);
+    delay(1000);
+    skeletonHand.write(0);
+    break;
+  
+  case 1:
+    // Move the skeleton hand to wave
+    skeletonHand.write(45);
+    delay(1000);
+    skeletonHand.write(30);
+    delay(1000);
+    skeletonHand.write(90);
+    delay(1000);
+    skeletonHand.write(0);
+    break;
+
+  case 2:
+    
+    break;
+
+  case 3:
+    break;
+
+  case 4:
+    break;
+
+  case 5:
+    break;
+
+  case 6:
+    break;
+
+  case 7:
+    break;
+
+  case 8:
+    break;
+
+  case 9:
+    break;
+
+  default:
+    break;
+  }
+}
+
+void wakeSkeleton(){ // Randomly select a wake-up animation for the skeleton with sound effects
+  switch (0) { // random(0, 10)
+    case 0:
+      // Simply wake up the skeleton body
+      skeletonBody.write(90);
+      delay(1000);
+      break;
+    
+    case 1:
+      break;
+
+    case 2:
+      break;
+
+    case 3:
+      break;
+
+    case 4:
+      break;
+
+    case 5:
+      break;
+
+    case 6:
+      break;
+
+    case 7:
+      break;
+
+    case 8:
+      break;
+
+    case 9:
+      break;
+
+    default:
+      break;
+    }
+  handSkeleton(); // After waking up, make the skeleton hand turn off the switch
+  skeletonBody.write(0); // Return skeleton to initial position
 }
 
 void rgbFade() {
