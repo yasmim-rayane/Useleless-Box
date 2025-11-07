@@ -1,4 +1,6 @@
 #include <Servo.h>
+#include <SoftwareSerial.h>
+#include <DFRobotDFPlayerMini.h>
 
 /*
   Useless Box with Skeleton - Main Code
@@ -9,32 +11,40 @@
   [ ] - Final testing and debugging
 */
 
-/* Constants */
-const int SERVO_LEFT_PIN = 7;
-const int SERVO_RIGHT_PIN = 10;
-const int SERVO_SKELETON_BODY_PIN = 4;
-const int SERVO_SKELETON_HAND_PIN = 9;
-
-const int RGB_RED_PIN = 11;
-const int RGB_GREEN_PIN = 5;
-const int RGB_BLUE_PIN = 6;
-
-const int TOGGLE_SWITCH_PIN = 13;
+/* Servo */
+const int SERVO_LEFT_PIN = ;
+const int SERVO_RIGHT_PIN = ;
+const int SERVO_SKELETON_BODY_PIN = ;
+const int SERVO_SKELETON_HAND_PIN = ;
 
 // Servo angles
-const int DOOR_OPEN_ANGLE = 45;
-const int DOOR_CLOSED_ANGLE = 0;
+const int DOOR_OPEN_ANGLE = ;
+const int DOOR_CLOSED_ANGLE = ;
 
-/* Servos */
+/* RGB Strip */
+const int RGB_RED_PIN = ;
+const int RGB_GREEN_PIN = ;
+const int RGB_BLUE_PIN = ;
+
+/* Toogle Switch */
+const int TOGGLE_SWITCH_PIN = ;
+
+/* MP3 Player */
+const int MP3_RX_PIN = ;
+const int MP3_TX_PIN = ;
+
+/* Servos and MP3 player */
 Servo leftDoor;
 Servo rightDoor;
 Servo skeletonBody;
 Servo skeletonHand;
+DFRobotDFPlayerMini playerMP3;
+SoftwareSerial mp3Serial(MP3_RX_PIN, MP3_TX_PIN);
 
 /* Function's prototypes */
 void triggerRandomDoor();
 void openLeftDoor(); // Rever essas funções para transformar em struct
-void openRightDoor(); // e essa
+void openRightDoor(); // e essa também
 void rgbFade();
 
 /* Initial config */
@@ -63,7 +73,19 @@ void setup(){
 /* Most important code below BE CAREFUL*/
 void loop(){
   int isToogleSwitchSwitched = digitalRead(TOGGLE_SWITCH_PIN);
-  isToogleSwitchSwitched ? triggerRandomDoor() : rgbFade();
+
+  // trigger randomDoor function after 3 times the switch is toggled
+  static int toggleCount = 0;
+  if (isToogleSwitchSwitched) {
+    toggleCount++;
+    if (toggleCount >= 3) {
+      triggerRandomDoor();
+      toggleCount = 0;
+    }
+  } else {
+    rgbFade();
+  }
+
 }
 
 void triggerRandomDoor(){
