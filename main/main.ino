@@ -12,26 +12,26 @@
 */
 
 /* Servo */
-const int SERVO_LEFT_PIN = ;
-const int SERVO_RIGHT_PIN = ;
-const int SERVO_SKELETON_BODY_PIN = ;
-const int SERVO_SKELETON_HAND_PIN = ;
+const int SERVO_LEFT_PIN = A0;
+const int SERVO_RIGHT_PIN = A2;
+const int SERVO_SKELETON_BODY_PIN = A1;
+const int SERVO_SKELETON_HAND_PIN = A3;
 
 // Servo angles
-const int DOOR_OPEN_ANGLE = ;
-const int DOOR_CLOSED_ANGLE = ;
+const int DOOR_OPEN_ANGLE = 90;
+const int DOOR_CLOSED_ANGLE = 0;
 
 /* RGB Strip */
-const int RGB_RED_PIN = ;
-const int RGB_GREEN_PIN = ;
-const int RGB_BLUE_PIN = ;
+const int RGB_RED_PIN = 9;
+const int RGB_GREEN_PIN = 10;
+const int RGB_BLUE_PIN = 11;
 
 /* Toogle Switch */
-const int TOGGLE_SWITCH_PIN = ;
+const int TOGGLE_SWITCH_PIN = 12;
 
 /* MP3 Player */
-const int MP3_RX_PIN = ;
-const int MP3_TX_PIN = ;
+const int MP3_RX_PIN = 5;
+const int MP3_TX_PIN = 6;
 
 /* Servos and MP3 player */
 Servo leftDoor;
