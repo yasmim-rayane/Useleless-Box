@@ -1,19 +1,12 @@
-const int eye1 = 9, eye2 = 10;
+const int EYE_LEFT_PIN = 9, EYE_RIGHT_PIN = 10;
 
-void eyesOn(){
-  digitalWrite(eye1, HIGH);
-  digitalWrite(eye2, HIGH);
-}
-
-void eyesOff(){
-  digitalWrite(eye1, LOW);
-  digitalWrite(eye2, LOW);
-}
+void eyesOn();
+void eyesOff();
 
 void setup() {
   Serial.begin(9600);
-  pinMode(eye1, OUTPUT);
-  pinMode(eye2, OUTPUT);
+  pinMode(EYE_LEFT_PIN, OUTPUT);
+  pinMode(EYE_RIGHT_PIN, OUTPUT);
 
   Serial.println(F("eyesTester iniciado. Piscar a cada segundo."));
 }
@@ -25,4 +18,16 @@ void loop() {
   eyesOff();
   Serial.println(F("Olhos OFF"));
   delay(1000);
+}
+
+// Eyes control
+void eyesOn() {
+  // If you prefer PWM brightness, replace digitalWrite with analogWrite(…, value);
+  digitalWrite(EYE_LEFT_PIN, HIGH);
+  digitalWrite(EYE_RIGHT_PIN, HIGH);
+}
+
+void eyesOff() {
+  digitalWrite(EYE_LEFT_PIN, LOW);
+  digitalWrite(EYE_RIGHT_PIN, LOW);
 }
